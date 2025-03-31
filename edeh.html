@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيديتك بالهز!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 50px;
+        }
+        #gift {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <h1>هز جوالك وخذ عيديتك! 🎉</h1>
+    <p>حرك جوالك بسرعة لتحصل على عيدية عشوائية!</p>
+    <p id="gift">🤔</p>
+
+    <script>
+        let lastShakeTime = 0;
+        const gifts = [
+            "💵 50 ريال!", 
+            "💰 100 ريال!", 
+            "🎁 مفاجأة خاصة!", 
+            "🥳 دعوة على القهوة!",
+            "🎊 عيدية 200 ريال!"
+        ];
+
+        window.addEventListener("devicemotion", function(event) {
+            let acceleration = event.accelerationIncludingGravity;
+            let totalAcceleration = Math.abs(acceleration.x) + Math.abs(acceleration.y) + Math.abs(acceleration.z);
+            
+            let currentTime = new Date().getTime();
+            if (totalAcceleration > 25 && currentTime - lastShakeTime > 1000) {
+                lastShakeTime = currentTime;
+                document.getElementById("gift").textContent = gifts[Math.floor(Math.random() * gifts.length)];
+            }
+        });
+    </script>
+</body>
+</html>
